@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forever ❤️</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Short+Stack&amp;family=Homemade+Apple&amp;display=swap'>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- A pen by Developer Rahul  -->
+<div class="paper heart">
+  <p>Touch Me</p>
+</div>
+
+<div class="paper image">
+  <p> Pranii, your smile is my favorite sight,</p>
+  <p> and your laughter is the melody </p>
+  <p> that brightens my day.</p>
+  <p> You are my heart's greatest joy. 😍 </p>
+  <img src="images/1.jpg" />
+</div>
+
+<div class="paper image">
+  <p>Every challenge we face together</p>
+  <p>strengthens our bond, Pranii.</p>
+  <p>Unwavering support makes</p>
+  <p>the day special and meaningful.</p>
+  <img src="images/2.jpg" />
+</div>
+
+<div class="paper image">
+  <p>How can someone be </p>
+  <p> so cute ❤️ </p>
+  <img src="images/3.jpg" />
+</div>
+
+<div class="paper red">
+  <p class="p1"> In your eyes, Pranii, </p>
+  <p class="p2">I see a future filled with love and laughter.</p>
+  <p class="p3">Your heart is my safe haven, </p>
+  <p class="p4"> I always feel cherished. 😍</p>
+</div>
+
+<div class="paper">
+  <p class="p1">Your presence is my favorite place to be, Pranii.</p>
+  <p class="p2">Our happiness is my greatest joy,</p>
+  <p class="p3"> your love makes every day more beautiful. <span style="color: red !important;">❤️</span></p>
+</div>
+
+<div class="paper">
+  <p class="p1">Drag the papers to move!</p>
+</div>
+
+<!-- Video Modal -->
+<div id="video-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <video id="video-player" controls autoplay playsinline>
+      <source src="pr - Made with Clipchamp.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+<!-- Add the audio element here -->
+<audio id="background-music" src="audio/perfect-beauty.mp3" loop></audio>
+
+<!-- partial -->
+<script src="./script.js"></script>
+
+<script>
+  // Wait for the DOM to fully load
+  document.addEventListener("DOMContentLoaded", function() {
+    // Add the fade-in class to trigger the transition
+    document.body.classList.add('fade-in');
+
+    // Play the background music on the first click
+    const backgroundMusic = document.getElementById("background-music");
+    let musicPlayed = false;
+
+    document.body.addEventListener("click", function() {
+      if (!musicPlayed) {
+        backgroundMusic.play();  // Play the music when the mouse is clicked
+        musicPlayed = true;      // Prevents the music from starting multiple times
+      }
+    });
+
+    // Handle fullscreen mode when the heart paper is clicked
+    const heartPaper = document.querySelector('.paper.heart');
+    const videoModal = document.getElementById('video-modal');
+    const videoPlayer = document.getElementById('video-player');
+
+    // Pause the video initially to prevent it from playing before modal opens
+    videoPlayer.pause();
+
+    heartPaper.addEventListener('click', function() {
+      videoModal.style.display = 'block'; // Show the video modal
+
+      // Request fullscreen for the video player
+      if (videoPlayer.requestFullscreen) {
+        videoPlayer.requestFullscreen();
+      } else if (videoPlayer.mozRequestFullScreen) { // Firefox
+        videoPlayer.mozRequestFullScreen();
+      } else if (videoPlayer.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+        videoPlayer.webkitRequestFullscreen();
+      } else if (videoPlayer.msRequestFullscreen) { // IE/Edge
+        videoPlayer.msRequestFullscreen();
+      }
+
+      // Play the video only after modal is opened
+      videoPlayer.play();
+    });
+
+    // Close modal when 'x' is clicked
+    const closeModal = document.querySelector('.close');
+    closeModal.addEventListener('click', function() {
+      videoModal.style.display = 'none'; // Hide the modal
+
+      // Exit fullscreen if the user closes the modal
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+
+      videoPlayer.pause(); // Pause the video when modal is closed
+    });
+  });
+</script>
+
+</body>
+</html>

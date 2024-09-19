@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Envelope + Letter (Open/Close on Click)</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        .start-button {
+            display: none; /* Initially hidden */
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff4081; /* Pink color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .start-button:hover {
+            background-color: #ff79a1; /* Lighter pink on hover */
+        }
+
+        .show-button .start-button {
+            display: inline-block; /* Show the button when the envelope is open */
+        }
+
+        /* Fade-out transition effect */
+        .fade-out {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <div class="letter">
+                    <div class="text">
+                        <strong>Dear Pranii.</strong>
+                        <p>Here's something special for you!</p>
+                        <!-- Start Button -->
+                        <button class="start-button" onclick="transitionToCrush()">Start</button>
+                    </div>
+                </div>
+            </div>
+            <div class="heart"></div>
+        </div>
+    </div>
+    <script>
+        const envelopeWrapper = document.querySelector('.envelope-wrapper');
+        const envelope = document.querySelector('.envelope');
+
+        envelopeWrapper.addEventListener('click', () => {
+            envelopeWrapper.classList.toggle('flap');
+            envelopeWrapper.classList.toggle('show-button'); // Show the button when opened
+        });
+
+        envelope.addEventListener('animationend', function(event) {
+            if (envelopeWrapper.classList.contains('flap') && event.animationName === 'your-flap-animation-name') {
+                envelopeWrapper.classList.add('show-button'); // Ensure the button is shown after animation ends
+            }
+        });
+
+        function transitionToCrush() {
+            // Add the fade-out effect
+            document.body.classList.add('fade-out');
+
+            // Wait for the transition to complete, then redirect
+            setTimeout(() => {
+                window.location.href = "../impressingCrush-main/index.html";
+            }, 1000); // Matches the transition duration
+        }
+    </script>
+</body>
+</html>
